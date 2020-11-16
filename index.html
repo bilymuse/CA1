@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Container for flexboxes */
+section {
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* Style the navigation menu */
+nav {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style the content */
+article {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: white;
+  padding: 50px;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+
+
+
+<header>
+  <h5>Docker tutorial for a 4th year computing audience - How to use docker </h5>
+</header>
+
+<section>
+  <nav>
+    <ul>
+      <li><a href="#k1"> What is Docker</a></li>
+	  </br>
+	  </br>
+      <li><a href="#k2">Images and containers </a></li>
+	  </br>
+	  </br>
+      <li><a href="#k3">How to Use Docker</a></li>
+	  </br>
+	  </br>
+	  <li><a href="#k4">Edit the Docker file</a></li>
+	  </br>
+	  </br>
+	  <li> <a href="#k5">Edit the Docker file</a> </li>
+    </ul>
+  </nav>
+  
+  <article>
+    <h1> <a name="k1" > What is Docker </a> </h1>
+    <p>Docker is a platform for system administrator and developers to share, 
+	build and run application using a container. When a container is used to deploy an application, 
+	this is referred to as containerisation. Over time the use of docker has become very popular because it is flexible, 
+	lightweight, portable, loosely coupled, scalable, and secure. </p>
+    
+    <p>The docker architecture from Client Side, Host and Registry is shown in diagram 3a below:</p>
+	
+     </br>
+    <img src="ben1.png" alt="docker architecture" width="600" height="400">
+ 
+	 <p> The docker architecture </p>
+	 </br> 
+	
+	 
+	 <h1> <a name="k2" > Images and containers </a> </h1>
+	 <p>	A docker image can be viewed like a digital photograph while a docker container is
+	 the printout of the digital photograph. A docker image contain all that is needed to run an application. 
+	 An image is a template for creating a required environment, a snapshot of the system at a particular time.
+	 The image is like a blueprint needed for a container, and the container is a running instance of an image. </p>
+	 
+	 </br>
+	<h1> <a name="k3" > How to Use Docker</a> </h1>
+	<p>The first thing is to install docker on your machine and set up an account online, 
+	Go to   <a href="https://www.docker.com/products/docker-desktop">Visit doccker.com</a>
+	download docker to your local machine and set up an account. </p>
+	
+	<p>Create a new directory CA1: create a folder on your computer to hold the ‘main.py’ file and ‘Dockerfile’ file. 
+	If creating new files with .html or .sh remember to add the extension appropriately. </p>
+	
+	<p>Open the Docker file using the nano editor, which can be to create, open and edit files. To learn more about 
+	nano editor go to  <a href="https://www.nano-editor.org/docs.php">Visit nano-editor.org.</a> </p>
+	
+	<p>The main command needed here are FROM, RUN, CMD, EXPOSE, COPY and WORKDIR. 
+	For more information on how to use these commands many other more 
+	<a href="https://phoenixnap.com/kb/how-to-list-start-stop-docker-containers">Visit  phoenixnap.com.</a> </p>
+
+	</br>
+	 <h1> <a name="k4" > Edit the Docker file</a> </h1>
+	<p>Because we want to launch a python code, our docker must contain all the dependencies necessary to launch Python. 
+	Firstly, go to  <a href="https://hub.docker.com/ "/a>Visit hub.docker.com</a> to access the official python image. 
+	Picked the first result after searching ‘python’ on the search bar. 
+	Use the nano editor to edit the content of your docker file. 
+	Below is a sample of the content of your docker file:</p>
+	
+	<p><h5>
+	FROM python:3.9 </br>
+	WORKDIR /CA1</br>
+	COPY DockerTutorial.html /CA1 </br>
+	CMD python3 -m http.server 8080
+	</h5></p>
+	
+	<p>This code allows you to import the base image using the FROM keyword, copy the image in to the root 
+	folder using the COPY and launch the image using the CMD command. </p> 
+	
+	</br>
+	<h1>Create the Docker image </h1>
+	<p>After writing the docker file, create the image to contain the application </p>
+	<h5>$ docker build -t python-test . </h5>
+
+	<p>The -t in the code allows you define the name of your image which we have chosen to be python-test.  The first time you build the docker you will be asked for authorisation. 
+	Check to confirm that the image is there by entering the command 'docker images' in the terminal. </p>
+	
+	</br>
+	<h1>Run the Docker Image</h1>
+	<p>Now that the image is created, you can launch the code by using the code: </p>
+	<h5>
+	$ docker run python-test </br>
+	$ docker run python-test
+	</h5>
+	<p>The docker run command allows you to run your docker file and you probably will need to stop, 
+	start, and kill your containers many times while running your image. More information on the docker command here: </p> 
+
+	</br>
+	<h1>Pulling an image </h1>
+	<p>Image can be pull by using the command 'docker pull' followed by the repository example: </p>
+	<h5>docker pull tudjburns/careless-bankings:latest </h5>
+	<p>Check to confirm the image has been pulled correctly by using 'docker images'. </p>
+	
+	</br>
+	 <h1>Pushing an image </h1>
+	<p>The push command is used to self-hosted image in google cloud or other repository 0r share with docker hub registry.  
+	Firstly, use 'docker tag' followed by the image ID and repo:</p>
+	<h5>docker tag df0995659b6a eu.gcr.io/<Project-ID>/CA1:latest </h5>
+	<p>you can then push image to your desired repository </p>
+	<h5>docker push eu.gcr.io/<Project-ID>/CA1:latest </h5>
+	<p>check to confirm the push: </p>
+	<h5>gcloud container images list --repository eu.gcr.io/<Project-ID></h5>
+	<p>The images in this repo will be displayed.</p>
+
+	</br>
+	<h1>Long Running Containers as Servers </h1>
+	<p>To run any of the container use the command docker run' again.
+	The ports can be map nusing the command ‘-p containerPort:listeningPort', 
+	followed by the Repository or Image ID.Examples: </p>
+	<h5>docker run -p 8090:8080 tudjburns/careless-banking:latest </br>
+	docker run -p 8080:8080 df0995659b6a </h5>
+	<p>As this is still running the terminal wont prompt you again. Click on the web preview button. 
+	A new tab will open, here you should be able to click your hosted html website.</p>
+
+
+	</br>
+	</br>
+	
+	<h1> <a name="k1" > How I completed this CA1 </a> </h1> 
+	<p>  A new directory called CA1 was created using mkdir command in the google cloud terminal. 
+		The DockerTutorial.html' file and Dockerfile was then added to the CA1 directory. The sudo vim editor was
+		used to edit the Dockerfile and the following was coded into the file: </p>
+	
+	<h5> 
+	FROM python:3.9 </br>
+	WORKDIR /CA1 </br>
+	COPY index.html /CA1 </br>
+	CMD python3 -m http.server 8080
+	</h5>
+	<p> The DockerTutorial.html' file was edited with the sudo vim editor with information about how to use
+	docker application.</p>
+	
+	</br>
+	<h3>Building the Docker Image </h3>
+	<p> The ‘docker build’ was used to build the docker image and this was confirm using the 'docker images' command. 
+	This was followed by the running the container which would act as a server to host this html site using the 
+	following command: </p>
+	<h5>docker run -p 8080:8080 ‘image id’ </p>
+
+	
+	<p>I confirm that the container was working by previewing the html file on the web.
+	The completed image was pushed to my private google repo. A sample of the command 
+	to tagged and pushed the image are: </p>
+	
+	<h5>docker tag 3298f4013856 eu.gcr.io/noted-style-293918/firstest:latestdocker </br>
+	docker push eu.gcr.io/noted-style-293918/firstest:latest </h5>
+	<p>after the completion of the above step, the web server container was built from the directory containing 
+	the dockerfile using the command:</p>
+	
+	<h5>gcloud functions deploy helloGET --runtime nodejs10 --trigger-http --allow-unauthenticated </br>
+	gcloud container images list --repository eu.gcr.io/operating-attic-290310 </h5>
+
+	<p>after the above, i was presented with the following line </p>
+	<h5> NAME </br>
+	eu.gcr.io/operating-attic-290310/ca1 <h5>
+	
+	</br>
+	<h3> Commit to Github </h3>
+	<p>This was followed by previewing and running the image on web and commiting it to Github using the following command </p>
+	
+	<h5> git clone </br>
+	mkdir image </br>
+	git clone </br>
+	cp -R </br>
+	git add </br>
+	git commit -m </br>
+	git push
+	</h5>
+	<p>The end </p>
+	
+ </article>
+</section>
+
+<footer>
+  <p> Ben Smith</p>
+</footer>
+
+</body>
+</html>
+
